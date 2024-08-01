@@ -1,11 +1,5 @@
 package bws
 
-import (
-	"math/rand"
-	"strings"
-	"time"
-)
-
 type brazilianWords struct {
 	totalWords int
 	separator  string
@@ -17,22 +11,6 @@ type BrazilianWordsInterface interface {
 
 func BrazilianWords(totalWords int, separator string) BrazilianWordsInterface {
 	return &brazilianWords{totalWords, separator}
-}
-
-func (b *brazilianWords) Sort() string {
-	last := len(wordList) - 1
-	result := ""
-	for i := 1; i <= b.totalWords; i++ {
-		source := rand.NewSource(time.Now().UnixNano())
-		rng := rand.New(source)
-		result = result + strings.ToLower(wordList[rng.Intn(last)])
-		if i < b.totalWords {
-			result = result + b.separator
-		}
-	}
-
-	return result
-
 }
 
 // source: https://www.ime.usp.br/~pf/dicios/
